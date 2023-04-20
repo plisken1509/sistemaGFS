@@ -1,11 +1,11 @@
 <?php
 require('fpdf/fpdf.php');
 session_start();
-$id=$_REQUEST['id'];
+//$id=$_REQUEST['id'];
 include "conexion.php";
 require 'phpmailer/class.phpmailer.php';
-$query="select v.noventa,v.fecha,v.totalventa,c.nit,c.nombre,c.telefono,c.direccion,p.descripcion,d.cantidad,d.precio_venta from venta v,cliente c,detalleventa d,producto p where v.codcliente=c.idcliente and d.noventa=v.noventa and d.codproducto=p.codproducto and v.noventa=$id";
-    $datos=mysqli_query($conection,$query);
+$query="SELECT * FROM clientes c JOIN productos p JOIN productos_vendidos pv JOIN ventas v where v.id='4' and pv.id_producto=p.id and pv.id_venta=v.id and v.id_cliente=c.id";
+    $datos=mysqli_query($db,$query);
     $numero_de_ventas = mysqli_num_rows($datos);
 //Initialize the 3 columns and the total
 $column_code = "";
@@ -18,8 +18,8 @@ while($row = mysqli_fetch_array($datos))
 {
     $code = $row["cantidad"];
     $name = $row["descripcion"];
-    $real_price = $row["precio_venta"];
-    $price_to_show = number_format($row["precio_venta"],2);
+    $real_price = $row["precioVenta"];
+    $price_to_show = number_format($row["precioVenta"],2);
 
     $column_code = $column_code.$code."\n";
     $column_name = $column_name.$name."\n";
@@ -28,9 +28,9 @@ while($row = mysqli_fetch_array($datos))
     //Sum all the Prices (TOTAL)
     $total = $total+($real_price*$code);
     $nombre=$row["nombre"];;
-    $cedula=$row["nit"];;
-    $telefono=$row["telefono"];;
-    $direccion=$row["direccion"];;
+    $cedula=$row["cedula"];;
+    $telefono="";
+    $direccion=$row["correo"];;
 
 }
 //mysqli_close();
@@ -126,7 +126,7 @@ $doc=$pdf->Output('','S');
         //$mail->AddAddress($row1['cliCorreo2']);
 
         // definiendo el adjunto
-        $mail->AddStringAttachment($doc, 'doc.pdf', 'base64', 'application/pdf');
+        $mail->AddStringAttachment($doc, 'reciboGFS.pdf', 'base64', 'application/pdf');
         // enviando
         //$mail->Send();
        	$mail->IsSMTP(); 
@@ -139,7 +139,7 @@ $doc=$pdf->Output('','S');
             
             if ($mail->Send())
                 echo "<script>alert('Correo enviado exitosamente.');
-                window.location ='../ventas.php';</script>";
+                window.location ='ventas.php';</script>";
             else
                 echo "<script>alert('Error al enviar el Correo');</script>";
 ?>
