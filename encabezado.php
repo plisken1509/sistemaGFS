@@ -36,7 +36,7 @@
 					<li><a href="./vender.php">Vender</a></li>
 					<li><a href="./ventas.php">Ventas</a></li>
 					<li><a href="./reportes.php">Reporte PDF</a></li>
-					<li><a href="./reporteVentas.php">Reporte Ventas</a></li>
+					<li><a href="./reporteVentas.php">Reporte Venta</a></li>
 				</ul>
 			</div>
 		</div>
