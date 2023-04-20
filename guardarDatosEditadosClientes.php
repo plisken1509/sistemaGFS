@@ -1,29 +1,14 @@
 <?php
-
-#Salir si alguno de los datos no está presente
-if(
-	!isset($_POST["cedula"]) || 
-	!isset($_POST["nombre"]) || 
-	!isset($_POST["correo"]) || 
-	!isset($_POST["password"]) || 
-	!isset($_POST["id"])
-) exit();
-
-#Si todo va bien, se ejecuta esta parte del código...
-
-include_once "base_de_datos.php";
-$id = $_POST["id"];
-$cedula = $_POST["cedula"];
-$nombre = $_POST["nombre"];
-$correo = $_POST["correo"];
-$password = $_POST["password"];
-
-$sentencia = $base_de_datos->prepare("UPDATE clientes SET cedula = ?, nombre = ?, correo = ?, password = ? WHERE id = ?;");
-$resultado = $sentencia->execute([$cedula, $nombre, $correo, $password, $id]);
-
-if($resultado === TRUE){
-	header("Location: ./listarClientes.php");
-	exit;
-}
-else echo "Algo salió mal. Por favor verifica que la tabla exista, así como el ID del producto";
+  include 'conexion.php';
+  $id=$_POST['id'];
+  $nombre=$_POST['nombre'];
+  $cedula=$_POST['cedula'];
+  $empresa=$_POST['empresa'];
+  $direccion=$_POST['direccion'];
+  $correo=$_POST['correo'];
+  $clave=$_POST['clave'];
+  $query="update clientes set empId='$empresa',nombre='$nombre',cedula='$cedula',correo='$correo',clave='$clave' where id=$id";
+  $enviar=mysqli_query($db,$query);
+  echo $empresa;
+  header('location:listarClientes.php');
 ?>

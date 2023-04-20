@@ -1,7 +1,8 @@
 <?php include_once "encabezado.php" ?>
 <?php
 include_once "base_de_datos.php";
-$sentencia = $base_de_datos->query("SELECT * FROM clientes;");
+$sentencia = $base_de_datos->query("SELECT c.id,c.nombre cliente, c.cedula, c.direccion,c.correo,c.clave,e.nombre empresa FROM clientes c
+JOIN empresa e ON c.empId=e.id;");
 $clientes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 ?>
 
@@ -16,9 +17,10 @@ $clientes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 				<tr>
 					<th>ID</th>
 					<th>Cédula</th>
-					<th>Nombre</th>
+					<th>Cliente</th>
+                    <th>Direccion</th>
 					<th>Correo</th>
-					<th>Password</th>
+					<th>Clave</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -28,9 +30,10 @@ $clientes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 				<tr>
 					<td><?php echo $cliente->id ?></td>
 					<td><?php echo $cliente->cedula ?></td>
-					<td><?php echo $cliente->nombre ?></td>
+					<td><?php echo $cliente->cliente ?></td>
+					<td><?php echo $cliente->direccion ?></td>
 					<td><?php echo $cliente->correo ?></td>
-					<td><?php echo $cliente->password ?></td>
+                    <td><?php echo $cliente->clave ?></td>
 					<td><a class="btn btn-warning" href="<?php echo "editarClientes.php?id=" . $cliente->id?>"><i class="fa fa-edit"></i></a></td>
 					<td><a class="btn btn-danger" href="<?php echo "eliminarClientes.php?id=" . $cliente->id?>"><i class="fa fa-trash"></i></a></td>
 				</tr>
