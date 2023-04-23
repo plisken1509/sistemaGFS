@@ -29,11 +29,11 @@
     <title>Servicio de Almuerzos</title>
 </head>
 
-<body style="background-image: url(imagenes/fondo2.png); background-size:100% 100%;background-repeat: no-repeat;">
+<body style="background-image: url(../../fondogfs.jpg); background-size:100% 100%;background-repeat: no-repeat;">
     
-<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #e1b323;" >
+<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758;" >
       
-      <a class="navbar-brand"><img src="imagenes/logo3.png" height="90px" width="180px;" /></a>
+      <a class="navbar-brand"><img src="../../logo2.png" height="90px" width="180px;" /></a>
          <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>
@@ -70,6 +70,20 @@
                         <a class="dropdown-item" href="desayunos.php">Desayuno</a>
                         <a class="dropdown-item" href="almuerzos.php">Almuerzo</a>
                         <a class="dropdown-item" href="meriendas.php">Merienda</a>
+                        
+                    </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                       <i class="fas fa-school"></i> Cafeteria
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="../../listar.php">Productos</a>
+                        <a class="dropdown-item" href="../../listarClientes.php">Clientes</a>
+                        <a class="dropdown-item" href="../../vender.php">Vender</a>
+                        <a class="dropdown-item" href="../../ventas.php">Ventas</a>
+                        <a class="dropdown-item" href="../../reportes.php">Reportes Excel</a>
+                        <a class="dropdown-item" href="../../reporteVentas.php">Reportes PDF</a>
                         
                     </div>
                     </li>
