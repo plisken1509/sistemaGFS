@@ -101,6 +101,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 					<th>Productos vendidos</th>
 					<th>Total</th>
 					<th>Ticket</th>
+                    <th>Correo</th>
 					<th>Eliminar</th>
 				</tr>
 			</thead>
@@ -135,7 +136,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 					<td><a class="btn btn-info" href="<?php echo "imprimirTicket.php?id=" . $venta->id?>"><i class="fa fa-print"></i></a></td>
 					<td><a class="btn btn-info" href="<?php echo "correo.php?id=" . $venta->id?>"><i class="far fa-envelope"></i></a></td>
 					
-					<td><a class="btn btn-danger" href="<?php echo "eliminarVenta.php?id=" . $venta->id?>"><i class="fa fa-trash"></i></a></td>
+					<td><a class="btn btn-danger" href="<?php echo "eliminarVenta.php?id=" . $venta->id."&cantidad=".$producto[2]?>"><i class="fa fa-trash"></i></a></td>
 				</tr>
 				<?php } ?>
 			</tbody>
