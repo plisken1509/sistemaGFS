@@ -18,7 +18,7 @@
     <script src="../catering/sis/bootstrap/js/jquery-3.6.1.min.js"></script>
     <script src="catering/sis/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
-    	body{
+    	body,table{
     		font-size: 16px;
     	}
     </style>
@@ -210,17 +210,17 @@ $granTotal = 0;
 					<td>
 						<form action="cambiar_cantidad.php" method="post">
 							<input name="indice" type="hidden" value="<?php echo $indice; ?>">
-							<input min="1" name="cantidad" class="form-control" required type="number"  onchange="this.form.submit()" value="<?php echo $producto->cantidad; ?>">
+							<input min="1" name="cantidad" class="form-control" required type="number"  onchange="this.form.submit()" value="<?php echo $producto->cantidad; ?>" style="font-size: 16px;">
 						</form>
 					</td>
 					<td><?php echo $producto->total ?></td>
-					<td><a class="btn btn-danger" href="<?php echo "quitarDelCarrito.php?indice=" . $indice ?>"><i class="fa fa-trash"></i></a></td>
+					<td><a class="btn btn-danger" href="<?php echo "quitarDelCarrito.php?indice=" . $indice ?>"style="font-size: 16px;"><i class="fa fa-trash"></i></a></td>
 				</tr>
 			<?php } ?>
 		</tbody>
 	</table>
 
-	<h3>Total: <?php echo $granTotal; ?></h3>
+	<h3><b>	Total: <?php echo $granTotal; ?></b>	</h3>
 	<form action="./terminarVenta.php" method="POST" al>
 	<section style="text-align: center;">
 		<select id="controlBuscador1" name="cliente" id="cliente" style="width: 50%">
@@ -232,11 +232,11 @@ $granTotal = 0;
 			<?php  }?>
 		</select>
 		<br><br>
-		<input name="total" type="hidden" value="<?php echo $granTotal; ?>">
+	<input name="total" type="hidden" value="<?php echo $granTotal; ?>">
 	</section>
 		<center>
-			<button type="submit" class="btn btn-success" onclick="return ConfirmarEliminar()">Terminar venta</button>
-			<a href="./cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
+			<button type="submit" class="btn btn-success" onclick="return ConfirmarEliminar()"style="font-size: 16px;">Terminar venta</button>
+			<a href="./cancelarVenta.php" class="btn btn-danger" style="font-size: 16px;">Cancelar venta</a>
 		</center>
 	</form>
 </div>
