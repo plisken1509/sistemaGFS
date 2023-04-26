@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="./css/fontawesome-all.min.css">
 	<link rel="stylesheet" href="./css/2.css">
 	<link rel="stylesheet" href="./css/estilo.css">
@@ -15,7 +16,12 @@
     <link rel="stylesheet" href="catering/sis/bootstrap/css/bootstrap.min.css">
     
     <script src="../catering/sis/bootstrap/js/jquery-3.6.1.min.js"></script>
-    <script src="../catering/sis/bootstrap/js/bootstrap.min.js"></script>
+    <script src="catering/sis/bootstrap/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    	body{
+    		font-size: 16px;
+    	}
+    </style>
 <script type="text/javascript">
         function ConfirmarEliminar()
         {
@@ -48,7 +54,7 @@ $granTotal = 0;
 	$sql1="SELECT id,nombre from clientes";
 	$result1=mysqli_query($conexion,$sql1);
 ?>
-	<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758;" >
+	<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758; height: 100px; font-size:16px;margin-top: -70px;" >
       
       <a class="navbar-brand"><img src="logo2.png" height="90px" width="180px;" /></a>
          <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
