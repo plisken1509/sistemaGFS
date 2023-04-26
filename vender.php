@@ -112,9 +112,9 @@ $granTotal = 0;
 					<td><?php echo $producto->descripcion ?></td>
 					<td><?php echo $producto->precioVenta ?></td>
 					<td>
-						<form action="cambiar_cantidad.php" method="post" id="miformulario">
+						<form action="cambiar_cantidad.php" method="post">
 							<input name="indice" type="hidden" value="<?php echo $indice; ?>">
-							<input min="1" name="cantidad" class="form-control" required type="number" value="<?php echo $producto->cantidad; ?>" onchange="validarForm();" onkeyup="validarForm();">
+							<input min="1" name="cantidad" class="form-control" required type="number"  onchange="this.form.submit()" value="<?php echo $producto->cantidad; ?>">
 						</form>
 					</td>
 					<td><?php echo $producto->total ?></td>
@@ -155,16 +155,9 @@ $granTotal = 0;
 	});
 </script>
 <script>
-	function validarForm(sender)
-{
-  //obtengo mi formulario por ID
-   form = document.getElementById('miformulario');
-  //MUESTRO CONFIRMACION PARA HACER EL SUBMIT
-  
- 
-    //hago el submit
-    form.submit();
-  
-}
+ function confirmar()
+        {
+                alert("starman");
+        }
 </script>
 <?php include_once "pie.php" ?>
