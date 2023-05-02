@@ -31,6 +31,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $ver2=mysqli_fetch_array($enviar2);
         $clienteID=$ver2['id'];
         $nombre=$ver2['nombre'];
+        $consumos=$ver2['consumos'];
         $query3="select * from consumos where cliId='$clienteID' and fecha=CURRENT_DATE and tipo='$completo'";
         $enviar3=mysqli_query($db,$query3);
         $ver3=mysqli_num_rows($enviar3);
@@ -43,11 +44,36 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         else{
             if($ver3>0){
                 //echo "ya consumio hoy";
+                if ($consumos>99) {
+                   $query4="insert into consumos values(0,'$clienteID',now(),CURTIME(),'$completo','0.00')";
+                $enviar4=mysqli_query($db,$query4);
+                $query20="select max(id) as ul from consumos";
+                $enviar20=mysqli_query($db,$query20);
+                $ver20=mysqli_fetch_array($enviar20);
+                $ultimo=$ver20['ul'];
+                $query21="select * from consumos where id=$ultimo";
+                $enviar21=mysqli_query($db,$query21);
+                $ver21=mysqli_fetch_array($enviar21);
+                $ultimo2=$ver21['fecha'];
+                echo"<script>
+                        window.location = '$re';
+                      </script>";
+                $nombre_impresora = "POS-80C"; 
+                $connector = new WindowsPrintConnector($nombre_impresora);
+                $printer = new Printer($connector);
+                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nCodigo PS: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
+                $printer->feed();
+                $printer->cut();
+                $printer->pulse();
+                $printer->close(); 
+                }else{
+
+
                 echo"<script>
                         alert('Consumo ya existente');
                         window.location = '$re';
                       </script>";
-                
+                }
             }else{
                 $query4="insert into consumos values(0,'$clienteID',now(),CURTIME(),'$completo','0.00')";
                 $enviar4=mysqli_query($db,$query4);
@@ -65,7 +91,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 $nombre_impresora = "POS-80C"; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
-                $printer->text("****ANNILUNCH S.A.****\nCliente: $nombre\nCedula: $cedula\nCodigo PS: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
+                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nCodigo PS: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
                 $printer->feed();
                 $printer->cut();
                 $printer->pulse();
