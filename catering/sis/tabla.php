@@ -3,6 +3,7 @@
 	$fecha1=$_REQUEST['fecha1'];
 	$fecha2=$_REQUEST['fecha2'];
 	$empleado=$_REQUEST['empleado'];
+    $empresa=$_REQUEST['empresa'];
 
 ?>
 
@@ -16,9 +17,9 @@
     
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #e1b323;" >
+<nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758;" >
       
-      <a class="navbar-brand"><img src="imagenes/logo3.png" height="90px" width="180px;" /></a>
+      <a class="navbar-brand"><img src="../../logo2.png" height="90px" width="180px;" /></a>
          <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>
@@ -42,7 +43,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="listarClientes.php">Administrar</a>
-                        <a class="dropdown-item" href="index.php">Nuevo</a>
+                        <a class="dropdown-item" href="nuevoCliente.php">Nuevo</a>
                         
                         
                     </div>
@@ -55,6 +56,20 @@
                         <a class="dropdown-item" href="desayunos.php">Desayuno</a>
                         <a class="dropdown-item" href="almuerzos.php">Almuerzo</a>
                         <a class="dropdown-item" href="meriendas.php">Merienda</a>
+                        
+                    </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                       <i class="fas fa-school"></i> Cafeteria
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="../../listar.php">Productos</a>
+                        <a class="dropdown-item" href="../../listarClientes.php">Clientes</a>
+                        <a class="dropdown-item" href="../../vender.php">Vender</a>
+                        <a class="dropdown-item" href="../../ventas.php">Ventas</a>
+                        <a class="dropdown-item" href="../../reportes.php">Reportes Excel</a>
+                        <a class="dropdown-item" href="../../reporteVentas.php">Reportes PDF</a>
                         
                     </div>
                     </li>
@@ -79,13 +94,23 @@
 <?php
 	$query="";
 	if ($empleado=="Todos") {
-		$query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costo as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2'";
+        if ($empresa>0) {
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa'";
+        }else{
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2'";
+        }
+		
 		
 	}else{
-		$query="SELECT cl.cedula as cedula,cl.nombre as cliente,emp.nombre as empresa,cl.centro_costo as codigo,c.fecha as fecha, c.hora as hora, c.tipo as tipo from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId  and c.fecha BETWEEN '$fecha1' and '$fecha2' and tipo='$empleado'";
+        if ($empresa>0) {
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa' and tipo='$empleado'";
+        }else{
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and tipo='$empleado'";
+        }
+		
 	}
 	
-//echo $query;
+echo $query;
     $enviar=mysqli_query($db,$query);
     $ver=mysqli_fetch_array($enviar);
     $contar=mysqli_num_rows($enviar);
@@ -96,7 +121,7 @@
       <th scope=col>Cedula</th>
       <th scope=col>Nombre</th>
       <th scope=col>Empresa</th>
-      <th scope=col>Codigo</th>
+      <th scope=col>Centro Costos</th>
       <th scope=col>Fecha</th>
       <th scope=col>Hora</th>
       <th scope=col>Tipo</th>

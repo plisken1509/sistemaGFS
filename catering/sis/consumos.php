@@ -25,9 +25,9 @@ if (isset($_POST['enviar'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Annilunch - Reportes</title>
+    <title>GFS - Reportes</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style5.css">
+    <link rel="stylesheet" type="text/css" href="style6.css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     
@@ -35,7 +35,7 @@ if (isset($_POST['enviar'])) {
     <script src="bootstrap/js/bootstrap.min.js"></script>
             
 </head>
-<body>
+<body style="background-image: url(imagenes/fondor.jpg);">
  <nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758;" >
       
       <a class="navbar-brand"><img src="../../logo2.png" height="90px" width="180px;" /></a>
@@ -146,9 +146,34 @@ if (isset($_POST['enviar'])) {
                            <option value="Todos">Todos</option>
                         </select>
                     </div>
+                    <label>Empresa</label><br>
+                    <div class="input-group form-group">
+
+                        
+                        <select class="form-control" name="empresa">
+                            <option value="Todos" selected>Todos</option>
+                           <?php
+                    $query2="select * from empresa";
+                    $enviar2=mysqli_query($db,$query2);
+                    $ver2=mysqli_fetch_array($enviar2);
+                    do{
+                        $id=$ver2['id'];
+                        $nombre=$ver2['nombre'];
+                        echo '
+                            <option value="'.$id.'">'.$nombre.'</option>';
+                       
+                        
+                        
+                    }while ($ver2=mysqli_fetch_array($enviar2));
+
+                ?>
+                        </select>
+                    </div>
                     <div class="form-group">
                         
-                        <input type="submit" name="enviar" value="Generar" class="btn float-right login_btn">
+                        <input type="submit" name="enviar" value="Generar" class="btn float-right login_btn" style="
+background-color: #DCEB8E;
+">
                     </div>
                 </form>
             </div>
