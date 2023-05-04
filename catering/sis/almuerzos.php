@@ -1,5 +1,23 @@
 <?php
     include ('conexion.php');
+    if (isset($_REQUEST['status'])) {
+        if ($_REQUEST['status']=="1") {
+            $star='<div class="alert alert-success" role="alert">
+  Consumo Registrado  
+</div>';    
+        }if ($_REQUEST['status']=="2") {
+            $star='<div class="alert alert-warning" role="alert">
+  Usuario no Registrado  
+</div>';    
+        }if ($_REQUEST['status']=="3") {
+            $star='<div class="alert alert-danger" role="alert">
+  Consumo no Registrado  
+</div>';    
+        }
+        
+    }else{
+        $star="";
+    }
 ?>
 <script type="text/javascript" src="este.js"></script> 
 <link rel="stylesheet" href="css/estilos.css">
@@ -104,6 +122,7 @@
         <form id="login_form" class="form_class" action="guardad.php?tipo=A" method="post">
 
             <div class="form_div">
+                <?php echo $star ?>
                 <label>Cedula:</label>
                 <input class="field_class" name="cedula" id="cedula" type="text" placeholder="Cedula" autofocus required>
                 <button class="submit_class" type="submit" form="login_form">Consumir</button>
