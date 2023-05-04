@@ -119,23 +119,86 @@
     <main style="background-image:url(https://thumbs.dreamstime.com/b/fondo-negro-de-cocina-con-especias-y-plato-vista-superior-espacio-libre-para-el-texto-estilo-r%C3%BAstico-183926482.jpg);background-size: 100% 100%;">
         <b><h1 style="background-color: white;color:#156f15;">Consumo Almuerzos</h1></b>
         <br>
-        <form id="login_form" class="form_class" action="guardad.php?tipo=A" method="post">
+        
+        
+        <div style="width: 90%; float:right"> 
+            <form id="login_form" class="form_class" action="guardad.php?tipo=A" method="post">
 
-            <div class="form_div">
-                <?php echo $star ?>
-                <label>Cedula:</label>
-                <input class="field_class" name="cedula" id="cedula" type="text" placeholder="Cedula" autofocus required>
-                <button class="submit_class" type="submit" form="login_form">Consumir</button>
-            </div>
-            <div class="info_div">
-                <?php
-                    $query="select * from consumos where fecha=CURDATE() and tipo='Almuerzo'";
-                    $enviar=mysqli_query($db,$query);
-                    $ver=mysqli_num_rows($enviar);
-                    echo "Consumos Hoy: ".$ver;
-                ?>
-            </div>
-        </form>
+                <div class="form_div">
+                    <?php echo $star ?>
+                    <label>Cedula:</label>
+                    <input class="field_class" name="cedula" id="cedula" type="text" placeholder="Cedula" autofocus required>
+                    <button class="submit_class" type="submit" form="login_form">Consumir</button>
+                </div>
+                <div class="info_div">
+                    <?php
+                        $query="select * from consumos where fecha=CURDATE() and tipo='Almuerzo'";
+                        $enviar=mysqli_query($db,$query);
+                        $ver=mysqli_num_rows($enviar);
+                        echo "Consumos Hoy: ".$ver;
+                    ?>
+                </div>
+            </form>
+        </div>
+        <?php
+            $query="";
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha=CURDATE()";
+            $enviar=mysqli_query($db,$query);
+            $ver=mysqli_fetch_array($enviar);
+            $contar=mysqli_num_rows($enviar);
+        ?>
+        
+        <?php
+            
+            $enviar=mysqli_query($db,$query);
+            $ver=mysqli_fetch_array($enviar);
+            $contar=mysqli_num_rows($enviar);
+            echo "<div class=container><center><table class=table >
+                <thead class=thead-dark>
+            <tr>
+              <th scope=col>Cedula</th>
+              <th scope=col>Nombre</th>
+              <th scope=col>Empresa</th>
+              <th scope=col>Centro Costos</th>
+              <th scope=col>Fecha</th>
+              <th scope=col>Hora</th>
+              <th scope=col>Tipo</th>
+              
+            </tr>
+          </thead>";
+            do{
+            
+            $cedula=$ver['cedula'];
+            $cliente=$ver['cliente'];
+            $empresa=$ver['empresa'];
+            $codigo=$ver['codigo'];
+            $fecha=$ver['fecha'];
+            $hora=$ver['hora'];
+            $tipo=$ver['tipo'];
+            
+        
+            echo '
+                <tbody>
+                <tr>
+                
+                <td>'.$cedula.'</td>
+                <td>'.$cliente.'</td>
+                <td>'.$empresa.'</td>
+                <td>'.$codigo.'</td>
+                <td>'.$fecha.'</td>
+                <td>'.$hora.'</td>
+                <td>'.$tipo.'</td>
+                
+                
+                </tr>
+        
+            ';
+            }while ($ver=mysqli_fetch_array($enviar)); 
+                echo '</tbody></table>';
+        ?>
+
+
+
     </main>
     </center>
    
