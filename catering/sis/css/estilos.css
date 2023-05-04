@@ -30,8 +30,8 @@ main {
     background-size: cover;
 }
 .form_class {
-    width: 500px;
-    padding: 40px;
+    width: 300px;
+    padding: 20px;
     border-radius: 8px;
     background-color: white;
     font-family: 'system-ui';

@@ -121,7 +121,7 @@
         <br>
         
         
-        <div style="width: 90%; float:right"> 
+        <div style="width: 40%; float:left"> 
             <form id="login_form" class="form_class" action="guardad.php?tipo=A" method="post">
 
                 <div class="form_div">
@@ -142,24 +142,22 @@
         </div>
         <?php
             $query="";
-            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha=CURDATE()";
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha=CURDATE() ORDER BY hora DESC";
             $enviar=mysqli_query($db,$query);
             $ver=mysqli_fetch_array($enviar);
             $contar=mysqli_num_rows($enviar);
         ?>
-        
+<div style="width: 50%; float:left">
         <?php
-            
             $enviar=mysqli_query($db,$query);
             $ver=mysqli_fetch_array($enviar);
             $contar=mysqli_num_rows($enviar);
-            echo "<div class=container><center><table class=table >
+            echo "<div class=container><center><table class=table style='background-color: white'
                 <thead class=thead-dark>
             <tr>
               <th scope=col>Cedula</th>
               <th scope=col>Nombre</th>
               <th scope=col>Empresa</th>
-              <th scope=col>Centro Costos</th>
               <th scope=col>Fecha</th>
               <th scope=col>Hora</th>
               <th scope=col>Tipo</th>
@@ -171,7 +169,6 @@
             $cedula=$ver['cedula'];
             $cliente=$ver['cliente'];
             $empresa=$ver['empresa'];
-            $codigo=$ver['codigo'];
             $fecha=$ver['fecha'];
             $hora=$ver['hora'];
             $tipo=$ver['tipo'];
@@ -184,7 +181,6 @@
                 <td>'.$cedula.'</td>
                 <td>'.$cliente.'</td>
                 <td>'.$empresa.'</td>
-                <td>'.$codigo.'</td>
                 <td>'.$fecha.'</td>
                 <td>'.$hora.'</td>
                 <td>'.$tipo.'</td>
@@ -196,9 +192,7 @@
             }while ($ver=mysqli_fetch_array($enviar)); 
                 echo '</tbody></table>';
         ?>
-
-
-
+</div>
     </main>
     </center>
    
