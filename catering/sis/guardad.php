@@ -61,7 +61,13 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 echo"<script>
                         window.location = '$re?status=1';
                       </script>";
-                $nombre_impresora = "POS-80C"; 
+                $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = "POS-80C"; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
                 $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
@@ -69,6 +75,8 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 $printer->cut();
                 $printer->pulse();
                 $printer->close(); 
+        }
+                
                 }else{
 
 
@@ -90,14 +98,21 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 echo"<script>
                         window.location = '$re?status=1';
                       </script>";
-                $nombre_impresora = "POS-80C"; 
+                $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = "POS-80C"; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
                 $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
                 $printer->feed();
                 $printer->cut();
                 $printer->pulse();
-                $printer->close();
+                $printer->close(); 
+        }
             }
         }
         //echo $query3;
