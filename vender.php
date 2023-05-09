@@ -22,7 +22,7 @@ $granTotal = 0;
 
 
 
- 	$conexion=mysqli_connect('localhost','root','','ventas');
+ 	$conexion=mysqli_connect('localhost','root','','anefi');
 	$sql="SELECT id,descripcion from productos";
 	$result=mysqli_query($conexion,$sql);
 

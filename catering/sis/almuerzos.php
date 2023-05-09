@@ -13,6 +13,10 @@
             $star='<div class="alert alert-danger" role="alert">
   Consumo no Registrado  
 </div>';    
+        }if ($_REQUEST['status']=="5") {
+            $star='<div class="alert alert-success" role="alert">
+  Extras Registrados  
+</div>';    
         }
         
     }else{
@@ -20,6 +24,7 @@
     }
 ?>
 <script type="text/javascript" src="este.js"></script> 
+
 <link rel="stylesheet" href="css/estilos.css">
 
     <head>
@@ -138,6 +143,19 @@
                         echo "Consumos Hoy: ".$ver;
                     ?>
                 </div>
+                <div class="info_div" style="text-align: left;">
+                <center><h3>Extras</h3></center>
+                <input class="form-check-input" type="checkbox" value="almuerzo" name="almuerzoExtra" style="align:left;">
+                <label class="form-check-label" for="flexCheckCheckedDisabled">
+    Almuerzo Extra
+  </label>
+  <br>
+  <input class="form-check-input" type="checkbox" value="empaque" name="empaque">
+                <label class="form-check-label" for="flexCheckCheckedDisabled">
+    Empaque
+  </label>    
+                </div>
+                
             </form>
         </div>
         <?php
