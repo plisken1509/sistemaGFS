@@ -4,6 +4,7 @@ use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
     include ('conexion.php');
+    $mensaje="";
     $tipo=$_REQUEST['tipo'];
     $cedula=$_REQUEST['cedula'];
     $completo="";
@@ -17,6 +18,34 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
     }if ($tipo=="M") {
         $completo="Merienda";
         $re="meriendas.php";
+    }
+     if (isset($_REQUEST['empaque'])) {
+        $empaque="Empaque";
+        $query50="select * from clientes where cedula='$cedula'";
+        $enviar50=mysqli_query($db,$query50);
+        $ver50=mysqli_num_rows($enviar50);
+        $ver51=mysqli_fetch_array($enviar50);
+        $cid=$ver51['id'];
+        if($ver50>0){
+            $query52="insert into extras values(0,'$cid','Empaque','0.60',now(),'1')";
+            $enviar52=mysqli_query($db,$query52);
+            $mensaje=$mensaje." Extra: Empaque $0.60 \n";
+        }
+
+
+    }
+    if (isset($_REQUEST['almuerzoExtra'])) {
+        $almuerzoe="Almuerzo Extra";
+        $query50="select * from clientes where cedula='$cedula'";
+        $enviar50=mysqli_query($db,$query50);
+        $ver50=mysqli_num_rows($enviar50);
+        $ver51=mysqli_fetch_array($enviar50);
+        $cid=$ver51['id'];
+        if($ver50>0){
+            $query52="insert into extras values(0,'$cid','Almuero Extra','3.50',now(),'1')";
+            $enviar52=mysqli_query($db,$query52);
+            $mensaje=$mensaje." Extra: Almuerzo Extra $3.50 \n";
+        }
     }
     $query="select * from clientes where cedula='$cedula'";
     $enviar=mysqli_query($db,$query);
@@ -61,20 +90,50 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 echo"<script>
                         window.location = '$re?status=1';
                       </script>";
-                $nombre_impresora = "POS-80C"; 
+                $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = "POS-80C"; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
-                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
+                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n**Extra**\n$mensaje****GRACIAS****");
                 $printer->feed();
                 $printer->cut();
                 $printer->pulse();
                 $printer->close(); 
+        }
+                
                 }else{
-
-
+                    if (isset($empaque)||isset($almuerzoe)) {
+                        $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = "POS-80C"; 
+                $connector = new WindowsPrintConnector($nombre_impresora);
+                $printer = new Printer($connector);
+                $printer->text("****Gourmet Food Service****\n****EXTRA SIN ALMUERZO****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\n\n$mensaje****GRACIAS****");
+                $printer->feed();
+                $printer->cut();
+                $printer->pulse();
+                $printer->close();
                 echo"<script>
+                        window.location = '$re?status=5';
+                      </script>"; 
+        }
+                    }
+                    else{
+                       echo"<script>
                         window.location = '$re?status=3';
-                      </script>";
+                      </script>"; 
+                    }
+
+                
                 }
             }else{
                 $query4="insert into consumos values(0,'$clienteID',now(),CURTIME(),'$completo','0.00')";
@@ -90,14 +149,21 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
                 echo"<script>
                         window.location = '$re?status=1';
                       </script>";
-                $nombre_impresora = "POS-80C"; 
+                $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = "POS-80C"; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
-                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n****GRACIAS****");
+                $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n**Extra**\n$mensaje****GRACIAS****");
                 $printer->feed();
                 $printer->cut();
                 $printer->pulse();
-                $printer->close();
+                $printer->close(); 
+        }
             }
         }
         //echo $query3;

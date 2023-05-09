@@ -110,7 +110,7 @@
 		
 	}
 	
-echo $query;
+//echo $query;
     $enviar=mysqli_query($db,$query);
     $ver=mysqli_fetch_array($enviar);
     $contar=mysqli_num_rows($enviar);
