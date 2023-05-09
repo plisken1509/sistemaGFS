@@ -141,18 +141,19 @@
             </form>
         </div>
         <?php
-            $query="";
+            $query="";            
             $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha=CURDATE() ORDER BY hora DESC";
             $enviar=mysqli_query($db,$query);
             $ver=mysqli_fetch_array($enviar);
             $contar=mysqli_num_rows($enviar);
         ?>
-<div style="width: 50%; float:left">
+<div style="width: 700px;height: 350px; float:left;overflow:scroll;">
         <?php
             $enviar=mysqli_query($db,$query);
             $ver=mysqli_fetch_array($enviar);
             $contar=mysqli_num_rows($enviar);
-            echo "<div class=container><center><table class=table style='background-color: white'
+            
+            echo "<div class=container><center><table class=table style='background-color: white' 
                 <thead class=thead-dark>
             <tr>
               <th scope=col>Cedula</th>
@@ -164,17 +165,20 @@
               
             </tr>
           </thead>";
-            do{
-            
-            $cedula=$ver['cedula'];
-            $cliente=$ver['cliente'];
-            $empresa=$ver['empresa'];
-            $fecha=$ver['fecha'];
-            $hora=$ver['hora'];
-            $tipo=$ver['tipo'];
-            
-        
-            echo '
+if($contar>0) {
+
+
+    do {
+
+        $cedula=$ver['cedula'];
+        $cliente=$ver['cliente'];
+        $empresa=$ver['empresa'];
+        $fecha=$ver['fecha'];
+        $hora=$ver['hora'];
+        $tipo=$ver['tipo'];
+
+
+        echo '
                 <tbody>
                 <tr>
                 
@@ -189,8 +193,10 @@
                 </tr>
         
             ';
-            }while ($ver=mysqli_fetch_array($enviar)); 
-                echo '</tbody></table>';
+
+    } while ($ver=mysqli_fetch_array($enviar));
+    echo '</tbody></table>';
+}
         ?>
 </div>
     </main>

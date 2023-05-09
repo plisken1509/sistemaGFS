@@ -128,6 +128,7 @@ echo $query;
       
     </tr>
   </thead>";
+  if($contar>0) {
 	do{
 	
 	$cedula=$ver['cedula'];
@@ -159,4 +160,5 @@ echo $query;
 		echo '</tbody></table>
 		Total Consumos: '.$contar.'<br>
 		<a href="exportarExcel.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'&empleado='.$empleado.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
+}
 ?>
