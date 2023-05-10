@@ -17,13 +17,10 @@
 	<link rel="stylesheet" href="./css/2.css">
 	<link rel="stylesheet" href="./css/estilo.css">
 
-    
+  <script src="js/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="select2/select2.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+    <link href="/catering/sis/bootstrap/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	
 	<script src="select2/select2.min.js"></script>
 </head>
 <body>

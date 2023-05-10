@@ -128,19 +128,19 @@
       
     </tr>
   </thead>";
-  if($contar>0) {
-	do{
-	
-	$cedula=$ver['cedula'];
-	$cliente=$ver['cliente'];
-    $empresa=$ver['empresa'];
-    $codigo=$ver['codigo'];
-	$fecha=$ver['fecha'];
-	$hora=$ver['hora'];
-	$tipo=$ver['tipo'];
-	
+if($contar>0) {
+    do {
 
-	echo '
+        $cedula=$ver['cedula'];
+        $cliente=$ver['cliente'];
+        $empresa=$ver['empresa'];
+        $codigo=$ver['codigo'];
+        $fecha=$ver['fecha'];
+        $hora=$ver['hora'];
+        $tipo=$ver['tipo'];
+
+
+        echo '
 		<tbody>
 		<tr>
 		
@@ -156,8 +156,8 @@
 		</tr>
 
 	';
-	}while ($ver=mysqli_fetch_array($enviar)); 
-		echo '</tbody></table>
+    } while ($ver=mysqli_fetch_array($enviar));
+    echo '</tbody></table>
 		Total Consumos: '.$contar.'<br>
 		<a href="exportarExcel.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'&empleado='.$empleado.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
 }

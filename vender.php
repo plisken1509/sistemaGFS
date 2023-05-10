@@ -22,7 +22,7 @@ $granTotal = 0;
 
 
 
- 	$conexion=mysqli_connect('localhost','root','','anefi');
+ 	$conexion=mysqli_connect('localhost','root','','ventas');
 	$sql="SELECT id,descripcion from productos";
 	$result=mysqli_query($conexion,$sql);
 
@@ -167,5 +167,5 @@ $granTotal = 0;
   
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="catering/sis/bootstrap/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
 <?php include_once "pie.php" ?>
