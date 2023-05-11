@@ -96,7 +96,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         
         $ver20=mysqli_fetch_array($enviar20);
         if ($ver20['id']>0) {
-            $nombre_impresora = "POS-80C"; 
+            $nombre_impresora = $ver20['observacion']; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
                 $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n**Extra**\n$mensaje****GRACIAS****");
@@ -114,7 +114,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         
         $ver20=mysqli_fetch_array($enviar20);
         if ($ver20['id']>0) {
-            $nombre_impresora = "POS-80C"; 
+            $nombre_impresora = $ver20['observacion']; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
                 $printer->text("****Gourmet Food Service****\n****EXTRA SIN ALMUERZO****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\n\n$mensaje****GRACIAS****");
@@ -155,7 +155,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         
         $ver20=mysqli_fetch_array($enviar20);
         if ($ver20['id']>0) {
-            $nombre_impresora = "POS-80C"; 
+            $nombre_impresora = $ver20['observacion']; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
                 $printer->text("****Gourmet Food Service****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\nFecha: $ultimo2\n\n$completo \n**Extra**\n$mensaje****GRACIAS****");

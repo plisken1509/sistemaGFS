@@ -16,7 +16,7 @@
     </script>
 <?php
 session_start();
-include_once "encabezado.php";
+include_once "encabezado2.php";
 if (!isset($_SESSION["carrito"])) $_SESSION["carrito"] = [];
 $granTotal = 0;
 

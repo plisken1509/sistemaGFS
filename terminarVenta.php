@@ -1,19 +1,23 @@
 <?php
 if(!isset($_POST["total"])) exit;
 
-
+include("catering/sis/conexion.php");
 session_start();
-
+require __DIR__ . '/catering/sis/imprimir/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 $cliente = $_POST["cliente"];
 $total = $_POST["total"];
 include_once "base_de_datos.php";
-
+$mensaje="";
 
 $ahora = date("Y-m-d H:i:s");
 
 
 $sentencia = $base_de_datos->prepare("INSERT INTO ventas(id_cliente,fecha, total) VALUES (?, ?, ?);");
 $sentencia->execute([$cliente,$ahora, $total]);
+$totalv=$total;
 
 $sentencia = $base_de_datos->prepare("SELECT id FROM ventas ORDER BY id DESC LIMIT 1;");
 $sentencia->execute();
@@ -28,9 +32,30 @@ foreach ($_SESSION["carrito"] as $producto) {
 	$total += $producto->total;
 	$sentencia->execute([$producto->id, $idVenta, $producto->cantidad]);
 	$sentenciaExistencia->execute([$producto->cantidad, $producto->id]);
+	$query21="select * from productos where id='$producto->id'";
+        
+        $enviar21=mysqli_query($db,$query21);
+        
+        $ver21=mysqli_fetch_array($enviar21);
+	$mensaje=$mensaje." ".$producto->cantidad." ".$ver21['descripcion']." $ ".$ver21['precioVenta']."\n";
 }
+$query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+        
+        $enviar20=mysqli_query($db,$query20);
+        
+        $ver20=mysqli_fetch_array($enviar20);
+        if ($ver20['id']>0) {
+            $nombre_impresora = $ver20['observacion']; 
+                $connector = new WindowsPrintConnector($nombre_impresora);
+                $printer = new Printer($connector);
+                $printer->text("          ****Gourmet Food Service****\n                ****CAFETERIA****\n\n$mensaje\nTotal Venta: $".$totalv."\n\n                 ****GRACIAS****");
+                $printer->feed();
+                $printer->cut();
+                $printer->pulse();
+                $printer->close();
 $base_de_datos->commit();
 unset($_SESSION["carrito"]);
 $_SESSION["carrito"] = [];
 header("Location: ./vender.php?status=1");
+}
 ?>
