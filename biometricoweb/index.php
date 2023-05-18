@@ -10,21 +10,22 @@ require("determinar_movimiento.php");
     background-image: url(img/fondo.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-attachment: fixed;
   }
 </style>
-
+<?php require("comunes/nav.php"); ?>
 <body>
-  <?php require("comunes/nav.php"); ?>
+  
 
- <header>
+ <header style="background-image: url(img/fondo.png);">
     <div align="center">
-      <br><br><br>
-      <form class="form-signin" action="index.php" method="POST" enctype="multipart/form-data" style="background-color:#2c4073;">
+      <br><br><br><br><br>
+      <form class="form-signin" action="index.php" method="POST" enctype="multipart/form-data" style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); ">
 
         <div style="text-align:center;padding:1em 0;">
-          <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FGuayaquil" width="100%" height="115" frameborder="0" seamless></iframe>
+         <h3 style="color: #b39523;">Gourmet Food Service</h3>
         </div>
           <?php
           if (isset($_GET["error"])) {
@@ -76,15 +77,12 @@ require("determinar_movimiento.php");
         </div>
         </br>
         <select id="actividad" name="actividad" class="form-control">
-          <option value="Acción Tutorial">Acción Tutorial</option>
-          <option value="Taller de perfeccionamiento">Taller de perfeccionamiento</option>
-          <option value="Reunión de Coordinadores">Reunión de Coordinadores</option>
-          <option value="Reunión de Carrera">Reunión de Carrera</option>
-          <option value="Otros">Otros</option>
+          <option value="Telefonica">Telefonica</option>
+          
         </select>
         <br>
         <div id="otro">
-          <input class="form-control" maxlength="100" type="text" id="sitio" name="sitio" placeholder="Lugar" required="" autofocus="" /> <br>
+          <input class="form-control" type="hidden" maxlength="100" type="text" id="sitio" name="sitio" placeholder="Lugar" required="" autofocus="" /> <br>
         </div>
         <div id="firma">
         </div>

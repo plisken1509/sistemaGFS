@@ -18,7 +18,7 @@ require("permisos.php");
 
             <h1>REGISTROS</h1>
             <div style="text-align:center;padding:1em 0;">
-                <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FGuayaquil" width="100%" height="115" frameborder="0" seamless></iframe>
+                
             </div>
             <form class="form-signin" action="index.php" method="POST" style="background-color:#2c4073;">
                 <p style="color:white;">Desde: <input style="color:black;" type="date" id="desde" required="" name="fecha"></p>

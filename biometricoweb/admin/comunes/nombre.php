@@ -1,1 +1,1 @@
-Sistema de Asistencia de Personal  
+Sistema de Control de Asistencia GFS 

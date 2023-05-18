@@ -9,28 +9,41 @@ $sentencia=$_REQUEST['fecha1'];
 $sentencia2=$_REQUEST['fecha2'];
 
 
-$resultados = mysqli_query($db,"SELECT * FROM ventas v JOIN productos_vendidos pv ON v.id=pv.id_venta JOIN productos p ON pv.id_producto=p.id JOIN clientes c ON v.id_cliente=c.id where v.fecha between '$sentencia' and '$sentencia2'");
+$resultados = mysqli_query($db,"SELECT * FROM clientes c JOIN productos p JOIN productos_vendidos pv JOIN ventas v where pv.id_producto=p.id and pv.id_venta=v.id and v.id_cliente=c.id and v.fecha BETWEEN '$sentencia' and '$sentencia2'");
+
 echo 
 "
    
   <table width=\"100%\" border=\"1\">
     <tr>
-      <td><b><center>Nombre Cliente</center></b></td>
-      <td><b><center>Fecha</center></b></td>
-      <td><b><center>precio</center></b></td>
-      <td><b><center>Producto</center></b></td>
+      <th scope=col>Cedula</th>
+      <th scope=col>Nombre</th>
+      <th scope=col>Fecha</th>
+      <th scope=col>Producto</th>
+      <th scope=col>Precio</th>
+      <th scope=col>Cantidad</th>
     </tr>";
 while($consulta = mysqli_fetch_array($resultados))
 {
-echo 
-"
-    <tr>
-      <td>".$consulta['nombre']."</td>
-      <td>".$consulta['fecha']."</td>
-      <td>".$consulta['total']."</td>
-      <td>".$consulta['descripcion']."</td>
-    </tr>
+
+    $cedula=$consulta['cedula'];
+    $nombre=$consulta['nombre'];
+    $fecha=$consulta['fecha'];
+    $descripcion=$consulta['descripcion'];
+    $precio=$consulta['precioVenta'];
+    $cantidad=$consulta['cantidad'];
+    $total=$precio*$cantidad;
+    echo '
+        <tbody>
+        <tr>
+        <td>'.$fecha.'</td>
+        <td>'.$nombre.'</td>
+        <td>'.$cantidad.'</td>
+        <td>'.$descripcion.'</td>
+        <td>'.$precio.'</td>
+        <td>'.$total.'</td>
+        </tr>
   
-";
+';
 }
 echo "</table>";
