@@ -153,10 +153,10 @@ if (isset($_POST['enviar'])) {
                         <select class="form-control" name="empresa">
                             <option value="Todos" selected>Todos</option>
                            <?php
-                    $query2="select * from empresa";
-                    $enviar2=mysqli_query($db,$query2);
-                    $ver2=mysqli_fetch_array($enviar2);
-                    do{
+                        $query2="select * from empresa";
+                        $enviar2=mysqli_query($db,$query2);
+                        $ver2=mysqli_fetch_array($enviar2);
+                        do{
                         $id=$ver2['id'];
                         $nombre=$ver2['nombre'];
                         echo '

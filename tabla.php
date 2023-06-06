@@ -3,6 +3,8 @@
  
     $fecha1=$_REQUEST['fecha1'];
     $fecha2=$_REQUEST['fecha2'];
+    $empresa=$_REQUEST['empresa'];
+
 ?>
 <!DOCTYPE html>
 <html>
