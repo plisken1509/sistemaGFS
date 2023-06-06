@@ -104,7 +104,7 @@
 //echo $query;
     $enviar=mysqli_query($db,$query);
     $ver=mysqli_fetch_array($enviar);
-    echo "<center><h1>Registros de Ventas</h1></center>";
+    echo "<center><h1>Registro de Ventas</h1></center>";
     echo "<div class=container><center><table class=table >
         <thead class=thead-dark>
     <tr>

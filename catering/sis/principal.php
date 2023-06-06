@@ -92,7 +92,8 @@
                        <i class="fas fa-address-book"></i> Reportes
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>    
+                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>
+                        <a class="dropdown-item" href="consumos2.php">Reporte Global</a>     
                     </div>
                     </li>
                     <li class="nav-item active">
