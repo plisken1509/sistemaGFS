@@ -54,7 +54,7 @@ $granTotal = 0;
 		} else if ($_GET["status"] === "4") {
 		?>
 			<div class="alert alert-warning">
-				<strong>Error:</strong> El producto que buscas no existe
+				<strong>Error:</strong> Usuario o Tag no registrado...
 			</div>
 		<?php
 		} else if ($_GET["status"] === "5") {
@@ -127,14 +127,8 @@ $granTotal = 0;
 	<h3>Total: <?php echo $granTotal; ?></h3>
 	<form action="./terminarVenta.php" method="POST" al>
 	<section style="text-align: center;">
-		<select id="controlBuscador1" name="cliente" id="cliente" style="width: 50%">
-			<option value="0">Seleccione Cliente:</option>
-			<?php while ($ver1=mysqli_fetch_row($result1)) {?>			
-			<option value="<?php echo $ver1[0] ?>">
-				<?php echo $ver1[1].'-'.$ver1[2] ?>
-			</option>
-			<?php  }?>
-		</select>
+		<input autocomplete="off" type="text" name="cliente" id="cliente" style="width: 50%" required="">
+			
 		<br><br>
 		<input name="total" type="hidden" value="<?php echo $granTotal; ?>">
 	</section>

@@ -1,5 +1,6 @@
    <!-- Navigation -->
-   <nav style="background-color:#8D5B35;" id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+   <nav style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); " id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
        <div class="container">
            <!-- Brand and toggle get grouped for better mobile display -->
            <ul class="nav nav-pills">
@@ -11,7 +12,7 @@
                </li>
 
                <li class="dropdown pull-right">
-                   <h4 style="color:white;" href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></h4>
+                   <h4 style="color:white;" href="#" data-toggle="dropdown" class="dropdown-toggle">Administrar <b class="caret"></b></h4>
                    <ul class="dropdown-menu">
                        <li><a href="empleados">Personal</a></li>
                        <li><a href="marcados">Registros</a></li>

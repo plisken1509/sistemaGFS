@@ -6,7 +6,16 @@ require("comunes/head.php");
 require("permisos.php");
 
 ?>
-
+<style type="text/css">
+    button:hover{
+        background-image: radial-gradient(circle at 48.93% 43.96%, #f6fbff 0, #e7e9f1 16.67%, #d4d4d4 33.33%, #bbbbb3 50%, #a1a393 66.67%, #8a907a 83.33%, #788267 100%); 
+        color: black; !important;
+        
+    }
+    .star{
+        background-image: radial-gradient(circle at 50% 50%, #ffe740 0, #d4c432 25%, #9e9e24 50%, #6e7817 75%, #46570d 100%);
+    }
+</style>
 <body style="background-color:#9b9b9a;">
 
     <?php require("comunes/nav_admin.php"); ?>
@@ -20,13 +29,15 @@ require("permisos.php");
             <div style="text-align:center;padding:1em 0;">
                 
             </div>
-            <form class="form-signin" action="index.php" method="POST" style="background-color:#2c4073;">
+            <form class="form-signin" action="index.php" method="POST" style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); ">
                 <p style="color:white;">Desde: <input style="color:black;" type="date" id="desde" required="" name="fecha"></p>
                 <p style="color:white;">Hasta: <input style="color:black;" type="date" id="hasta" required="" name="fecha2"></p>
 
-                <button class="btn btn-lg btn-block" style="background-color:#cb9a33;" type="submit">Aceptar</button>
+                <button class="btn btn-lg btn-block star"  type="submit">Aceptar</button>
             </form>
-            <form class="form-signin" action="excel.php" method="POST" style="background-color:#2c4073;">
+            <form class="form-signin" action="excel.php" method="POST" style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); ">
                 <?php
                 if (isset($_POST["fecha"]) && isset($_POST["fecha2"])) {
                     $fecha = $_POST["fecha"];
@@ -44,7 +55,7 @@ require("permisos.php");
                 <?php 
                 }
                 ?>
-                <button id="excel" name="excel" class="btn btn-lg btn-block" style="background-color:#8D5B35" type="submit">Generar Excel</button>
+                <button id="excel" name="excel" class="btn btn-lg btn-block star" type="submit">Generar Excel</button>
             </form>
             <div style="color:black;font-weight: 900;font-size: 20px">
                 <?php
@@ -53,7 +64,7 @@ require("permisos.php");
                     echo "Desde: ".$newDate = date("d-m-Y", strtotime($fecha));
                     $fecha2 = $_POST["fecha2"];
                     echo "<br>Hasta: ".$newDate = date("d-m-Y", strtotime($fecha2));
-                    $sql = "SELECT * FROM marcados INNER JOIN empleados ON marcados.cedula=empleados.cedula  WHERE marcados.fecha  BETWEEN '$fecha' AND '$fecha2' ORDER BY marcados.fecha_hora DESC";
+                    $sql = "SELECT * FROM marcados INNER JOIN empleados ON marcados.cedula=empleados.cedula  WHERE marcados.fecha  BETWEEN '$fecha' AND '$fechabackground-image: radial-gradient(circle at 50% 50%, #ffe740 0, #d4c432 25%, #9e9e24 50%, #6e7817 75%, #46570d 100%);2' ORDER BY marcados.fecha_hora DESC";
 
                 }else{
                     $sql = "SELECT * FROM marcados INNER JOIN empleados ON marcados.cedula=empleados.cedula   ORDER BY marcados.fecha_hora DESC";
@@ -68,8 +79,9 @@ require("permisos.php");
             ?>
                 <br>
                 <div align="center">
-                    <table class="table">
-                        <thead style="background-color:#0a4c9a; color:white">
+                    <table class="table" >
+                        <thead style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); color: white;">
                             <tr>
                                 <th>Foto</th>
                                 <th>Código</th>
@@ -140,7 +152,7 @@ require("permisos.php");
         </div>
     </header>
 
-    <?php require("comunes/footer.php"); ?>
+   
 
     <?php require("comunes/scripts.php"); ?>
 

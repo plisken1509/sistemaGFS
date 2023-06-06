@@ -6,18 +6,19 @@ require("comunes/head.php");
 require("permisos.php");
 ?>
 
-<body style="background-color:#2c4073;">
+<body>
    <?php require("comunes/nav_admin.php"); ?>
 
    <!-- Header -->
-   <header>
+   <header style="background-image:url(img/Recurso2.png);background-size: 100% 100%;margin-top: 50px;">
       <br><br><br>
       <div align="center">
-         <h1 style="color:white;">Bienvenido </h1>
+         <h1 style="color:white;"> </h1>
          <br>
-         <img style="width: 400px;" src="../img/logo.png" />
+         
       </div>
-      <br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      
    </header>
 
    <?php require("comunes/footer.php"); ?>

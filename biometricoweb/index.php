@@ -7,7 +7,7 @@ require("determinar_movimiento.php");
 ?>
 <style>
   body {
-    background-image: url(img/fondo.png);
+    background-image: url(admin/img/fondobr.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -18,7 +18,7 @@ require("determinar_movimiento.php");
 <body>
   
 
- <header style="background-image: url(img/fondo.png);">
+ <header style="background-image: url(admin/img/fondobry.png);">
     <div align="center">
       <br><br><br><br><br>
       <form class="form-signin" action="index.php" method="POST" enctype="multipart/form-data" style=" background: rgb(0,51,26);

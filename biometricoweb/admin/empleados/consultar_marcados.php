@@ -23,7 +23,16 @@ if (!isset($_GET["cedula"])) {
     }
 }
 ?>
-
+<style type="text/css">
+    button:hover{
+        background-image: radial-gradient(circle at 48.93% 43.96%, #f6fbff 0, #e7e9f1 16.67%, #d4d4d4 33.33%, #bbbbb3 50%, #a1a393 66.67%, #8a907a 83.33%, #788267 100%); 
+        color: black; !important;
+        
+    }
+    .star{
+        background-image: radial-gradient(circle at 50% 50%, #ffe740 0, #d4c432 25%, #9e9e24 50%, #6e7817 75%, #46570d 100%);
+    }
+</style>
 <body style="background-color:#9b9b9a;">
 
     <?php require("comunes/nav_admin.php"); ?>
@@ -46,11 +55,12 @@ if (!isset($_GET["cedula"])) {
                 <?php echo "<br>"; ?>
             </div>
 
-            <form style="background-color:#2c4073; color:white" class="form-signin" action="consultar_marcados.php?cedula=<?php echo $cedula; ?>" method="POST">
+            <form style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); color: white;" class="form-signin" action="consultar_marcados.php?cedula=<?php echo $cedula; ?>" method="POST">
                 <p style="color:white;">Fecha: <input style="color:black;" type="date"  required="" name="fecha"></p>
 
-                <button class="btn btn-lg btn-block" style="background-color:#cb9a33;" type="submit">Aceptar</button>
-                <button class="btn btn-lg btn-block" style="background-color:#8D5B35" onclick="location.href = 'index.php';" type="button">Cancelar</button>
+                <button class="btn btn-lg btn-block star" style="background-color:#cb9a33;" type="submit">Aceptar</button>
+                <button class="btn btn-lg btn-block" style="background-color:#f84d41" onclick="location.href = 'index.php';" type="button">Cancelar</button>
 
             </form>
             <br>
@@ -76,7 +86,8 @@ if (!isset($_GET["cedula"])) {
             ?>
                 <div align="center">
                     <table class="table">
-                        <thead style="background-color:#0a4c9a; color:white">
+                        <thead style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); color: white;">
                             <tr>
                                 <th>Hora</th>
                                 <th>Fecha</th>

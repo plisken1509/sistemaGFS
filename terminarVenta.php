@@ -14,6 +14,12 @@ $mensaje="";
 
 $ahora = date("Y-m-d H:i:s");
 
+$query25="select * from clientes where cedula='$cliente'";
+        $enviar25=mysqli_query($db,$query25);
+        $ver25=mysqli_fetch_array($enviar25);
+if ($ver25['id']>0) {
+    $cliente =$ver25['id'];
+
 
 $sentencia = $base_de_datos->prepare("INSERT INTO ventas(id_cliente,fecha, total) VALUES (?, ?, ?);");
 $sentencia->execute([$cliente,$ahora, $total]);
@@ -45,10 +51,13 @@ $query20="select * from configuracion where nombre='impresora' and descripcion='
         
         $ver20=mysqli_fetch_array($enviar20);
         if ($ver20['id']>0) {
+            $query24="SELECT *,now() as fecha FROM clientes where id=$cliente";
+        $enviar24=mysqli_query($db,$query24);
+        $ver24=mysqli_fetch_array($enviar24);
             $nombre_impresora = $ver20['observacion']; 
                 $connector = new WindowsPrintConnector($nombre_impresora);
                 $printer = new Printer($connector);
-                $printer->text("          ****Gourmet Food Service****\n                ****CAFETERIA****\n\n$mensaje\nTotal Venta: $".$totalv."\n\n                 ****GRACIAS****");
+                $printer->text("          ****Gourmet Food Service****\n                ****CAFETERIA****\n\nNombre:".$ver24['nombre']."\n$mensaje\nTotal Venta: $".$totalv."\n\nFecha:".$ver24['fecha']."\n\n                 ****GRACIAS****");
                 $printer->feed();
                 $printer->cut();
                 $printer->pulse();
@@ -57,5 +66,13 @@ $base_de_datos->commit();
 unset($_SESSION["carrito"]);
 $_SESSION["carrito"] = [];
 header("Location: ./vender.php?status=1");
+}else{
+    $base_de_datos->commit();
+unset($_SESSION["carrito"]);
+$_SESSION["carrito"] = [];
+header("Location: ./vender.php?status=1");
+}
+}else{
+   header("Location: ./vender.php?status=4");
 }
 ?>

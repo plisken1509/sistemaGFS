@@ -74,7 +74,8 @@ require("permisos.php");
                         ?>
                             <div align="center">
                                 <table class="table">
-                                    <thead style="background-color:#2c4073; color:white">
+                                    <thead style=" background: rgb(0,51,26);
+background: linear-gradient(357deg, rgba(0,51,26,1) 0%, rgba(0,102,51,1) 50%, rgba(0,25,13,1) 100%); color: white;">
                                         <tr>
                                             <th>Foto</th>
                                             <th>Codigo</th>
