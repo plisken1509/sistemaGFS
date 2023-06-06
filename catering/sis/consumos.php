@@ -151,7 +151,7 @@ if (isset($_POST['enviar'])) {
 
                         
                         <select class="form-control" name="empresa">
-                            <option value="Todos" selected>Todos</option>
+                            <option value="0" selected>Todos</option>
                            <?php
                         $query2="select * from empresa";
                         $enviar2=mysqli_query($db,$query2);
