@@ -5,6 +5,11 @@
     $fecha2=$_REQUEST['fecha2'];
     $empresa=$_REQUEST['empresa'];
 
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
