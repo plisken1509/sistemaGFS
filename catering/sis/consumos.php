@@ -98,6 +98,7 @@ if (isset($_POST['enviar'])) {
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="consumos.php">Reporte Diario</a>    
+                        <a class="dropdown-item" href="extras.php">Reporte Extras</a>    
                     </div>
                     </li>
                     <li class="nav-item active">

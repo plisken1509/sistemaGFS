@@ -2,7 +2,6 @@
 	include('conexion.php');
 	$fecha1=$_REQUEST['fecha1'];
 	$fecha2=$_REQUEST['fecha2'];
-	$empleado=$_REQUEST['empleado'];
     $empresa=$_REQUEST['empresa'];
 
 ?>
@@ -94,25 +93,13 @@
 </html>
 <?php
 	$query="";
-	if ($empleado=="Todos") {
         if ($empresa>0) {
-            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa'";
-            
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,c.descripcion as codigo,c.fecha fecha, c.precio as precio  from extras c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa'";
+            echo "1".$query;
         }else{
-            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2'";
+            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,c.descripcion as codigo,c.fecha fecha,c.precio as precio  from extras c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2'";
+            echo "2".$query;
         }
-		
-		
-	}else{
-        if ($empresa>0) {
-            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa' and tipo='$empleado'";
-            echo "3".$query;
-        }else{
-            $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos as codigo,c.fecha fecha, c.hora hora, c.tipo tipo  from consumos c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and tipo='$empleado'";
-            echo "4".$query;
-        }
-		
-	}
 	
 //echo $query;
     $enviar=mysqli_query($db,$query);
@@ -125,10 +112,9 @@
       <th scope=col>Cedula</th>
       <th scope=col>Nombre</th>
       <th scope=col>Empresa</th>
-      <th scope=col>Centro Costos</th>
+      <th scope=col>Extra</th>
       <th scope=col>Fecha</th>
-      <th scope=col>Hora</th>
-      <th scope=col>Tipo</th>
+      <th scope=col>Precio</th>
       
     </tr>
   </thead>";
@@ -140,9 +126,7 @@ if($contar>0) {
         $empresa=$ver['empresa'];
         $codigo=$ver['codigo'];
         $fecha=$ver['fecha'];
-        $hora=$ver['hora'];
-        $tipo=$ver['tipo'];
-
+        $precio=$ver['precio'];
 
         echo '
 		<tbody>
@@ -153,9 +137,7 @@ if($contar>0) {
         <td>'.$empresa.'</td>
         <td>'.$codigo.'</td>
 		<td>'.$fecha.'</td>
-		<td>'.$hora.'</td>
-		<td>'.$tipo.'</td>
-		
+		<td>'.$precio.'</td>
 		
 		</tr>
 
@@ -163,6 +145,6 @@ if($contar>0) {
     } while ($ver=mysqli_fetch_array($enviar));
     echo '</tbody></table>
 		Total Consumos: '.$contar.'<br>
-		<a href="exportarExcel.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'&empleado='.$empleado.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
+		<a href="exportarExcel.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
 }
 ?>

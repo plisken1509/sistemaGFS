@@ -114,13 +114,13 @@ if (isset($_POST['enviar'])) {
         <div class="card">
             <div class="card-header">
                 <br>
-                <h3>Reporte Global</h3>
+                <h3>Datos Reportes Extras</h3>
                 <div class="d-flex justify-content-end social_icon">
                     
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" name="frmUsuarios" action="tabla.php" target="_BLANK">
+                <form method="post" name="frmUsuarios" action="tablaExtras.php" target="_BLANK">
                     <label>Fecha Inicio</label><br>
                     <div class="input-group form-group">
 
@@ -135,28 +135,17 @@ if (isset($_POST['enviar'])) {
                        
                         <input type="date" class="form-control" placeholder="Password" name="fecha2" maxlength="30" id="password" required>
                     </div>
-                    <label>Tipo Consumo</label><br>
-                    <div class="input-group form-group">
-
-                        
-                        <select class="form-control" name="empleado" name="empleado">
-                            <option value="Almuerzo">Almuerzo</option>
-                           <option value="Desayuno">Desayuno</option>
-                           <option value="Merienda">Merienda</option>
-                           <option value="Todos">Todos</option>
-                        </select>
-                    </div>
                     <label>Empresa</label><br>
                     <div class="input-group form-group">
 
                         
                         <select class="form-control" name="empresa">
-                            <option value="Todos" selected>Todos</option>
+                            <option value="0" selected>Todos</option>
                            <?php
-                    $query2="select * from empresa";
-                    $enviar2=mysqli_query($db,$query2);
-                    $ver2=mysqli_fetch_array($enviar2);
-                    do{
+                        $query2="select * from empresa";
+                        $enviar2=mysqli_query($db,$query2);
+                        $ver2=mysqli_fetch_array($enviar2);
+                        do{
                         $id=$ver2['id'];
                         $nombre=$ver2['nombre'];
                         echo '
