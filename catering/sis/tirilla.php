@@ -1,13 +1,38 @@
 <?php
+ require __DIR__ . '/imprimir/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
     include ('conexion.php');
-    session_start();
-    $usuario=$_SESSION['usuario'];
-    $usuarioId=$_SESSION['nombre'];
-    if (!isset($usuario)) {
-        header("location:index.php");
+    if (isset($_GET['enviar'])) {
+      $query20="select * from configuracion where nombre='impresora' and descripcion='si'";
+      $enviar20=mysqli_query($db,$query20);
+      $ver20=mysqli_fetch_array($enviar20);
+      $nombre_impresora = $ver20['observacion']; 
+                $connector = new WindowsPrintConnector($nombre_impresora);
+                $printer = new Printer($connector);
+                $printer->text("****Gourmet Food Service****\n****EXTRA SIN ALMUERZO****\nCliente: $nombre\nCedula: $cedula\nEmpresa: $cod\n\n$mensaje****GRACIAS****");
+                $printer->feed();
+                $printer->cut();
+                $printer->pulse();
+                $printer->close();
+        header('location:tirilla.php');
+        
     }
+    $query="select * from consumos where fecha=curdate()";
+    $enviar=mysqli_query($db,$query);
+    $consumos=mysqli_num_rows($enviar);
 ?>
 <script type="text/javascript" src="este.js"></script> 
+<script>
+  function sobra(){
+    var c= document.getElementById("consumos").value;
+    var p= document.getElementById("producidos").value;
+    var s= p-c;
+    document.formulario.sobrantes.value=s;
+    
+  }
+</script> 
 <link rel="stylesheet" href="css/estilos.css">
 
     <head>
@@ -29,7 +54,7 @@
     <title>Servicio de Almuerzos</title>
 </head>
 
-<body style="background-image: url(../../fondogfs.jpg); background-size:100% 100%;background-repeat: no-repeat;">
+<body>
     
 <nav class="navbar navbar-expand-lg navbar-light "style="background-color: #62e758;" >
       
@@ -92,17 +117,12 @@
                        <i class="fas fa-address-book"></i> Reportes
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>
-                        <a class="dropdown-item" href="consumos2.php">Reporte Global</a>     
+                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>    
                     </div>
                     </li>
                     <li class="nav-item active">
-                     <a class="nav-link" href="tirilla.php"><i class="fas fa-home"></i> Tirilla <span class="sr-only">(current)</span></a>
-                 </li>
-                    <li class="nav-item active">
                      <a class="nav-link" href="salir.php"><i class="fas fa-home"></i> Salir <span class="sr-only">(current)</span></a>
                  </li>
-                  
                    
              </ul>
          </div>
@@ -110,12 +130,24 @@
   <head></head>
       <center>
     <main>
-        
+        <b><h1 style="background-color: white;color:#156f15;">Tirilla de Consumos</h1></b>
+        <br>
+        <form id="login_form" name="formulario" class="form_class" method="get">
 
+            <div class="form_div">
+                <label>Consumos:</label>
+                <input class="field_class" name="consumos" id="consumos" type="number" required readonly="" value="<?php echo $consumos ?>">
+                <label>Producidos:</label>
+                <input class="field_class" name="producidos" id="producidos" type="number" required onchange="sobra()">
+                <label>Sobrantes:</label>
+                <input class="field_class" name="sobrantes" id="sobrantes" type="number" requiered readonly="">
+                <button class="submit_class" name="enviar" type="submit">Imprimir</button>
+                
+            </div>
+        </form>
         
     </main>
     </center>
    
 </body>
-<b><h1 style="background-color: white;color:#156f15;">Sistema de Consumos</h1></b>
-        <br>
+<br><br>
