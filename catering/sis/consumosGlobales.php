@@ -97,8 +97,9 @@ if (isset($_POST['enviar'])) {
                        <i class="fas fa-address-book"></i> Reportes
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>    
-                        <a class="dropdown-item" href="extras.php">Reporte Extras</a>    
+                        <a class="dropdown-item" href="consumos.php">Reporte Diario</a>
+                        <a class="dropdown-item" href="extras.php">Reporte Extras</a>     
+                        <a class="dropdown-item" href="consumosGlobales.php">Reporte Global</a>    
                     </div>
                     </li>
                     <li class="nav-item active">
@@ -121,7 +122,7 @@ if (isset($_POST['enviar'])) {
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" name="frmUsuarios" action="tabla.php" target="_BLANK">
+                <form method="post" name="frmUsuarios" action="tablaGlobales.php" target="_BLANK">
                     <label>Fecha Inicio</label><br>
                     <div class="input-group form-group">
 
@@ -140,7 +141,7 @@ if (isset($_POST['enviar'])) {
                     <div class="input-group form-group">
 
                         
-                        <select class="form-control" name="empleado" name="empleado">
+                        <select class="form-control" name="tipoConsumo">
                             <option value="Almuerzo">Almuerzo</option>
                            <option value="Desayuno">Desayuno</option>
                            <option value="Merienda">Merienda</option>

@@ -2,7 +2,9 @@
 	include('conexion.php');
 	$fecha1=$_REQUEST['fecha1'];
 	$fecha2=$_REQUEST['fecha2'];
+	$tipoConsumo=$_REQUEST['tipoConsumo'];
     $empresa=$_REQUEST['empresa'];
+    echo $tipoConsumo;
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +80,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="consumos.php">Reporte Diario</a>
                         <a class="dropdown-item" href="extras.php">Reporte Extras</a>     
-                        <a class="dropdown-item" href="consumosGlobales.php">Reporte Global</a> 
+                        <a class="dropdown-item" href="consumosGlobales.php">Reporte Global</a>    
                     </div>
                     </li>
                     <li class="nav-item active">
@@ -93,29 +95,70 @@
 </html>
 <?php
 	$query="";
-    if ($empresa>0) {
-        $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresas,c.descripcion as codigo,c.fecha fecha, c.precio as precio  from extras c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2' and emp.id='$empresa'";
-        
-    }else{
-        $query="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresas,c.descripcion as codigo,c.fecha fecha, c.precio as precio  from extras c,clientes cl, empresa emp where c.cliId=cl.id and emp.id=cl.empId and c.fecha BETWEEN '$fecha1' and '$fecha2'";
-    }
-    
+	if ($tipoConsumo=="Todos") {
+        if ($empresa>0) {
+            $query ="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos codigo,c.fecha fecha,c.hora hora,c.tipo tipo,COUNT(c.fecha) as suma 
+                      FROM clientes cl 
+                      INNER JOIN consumos c on cl.id=c.cliId 
+                      INNER JOIN empresa emp on emp.id=cl.empId
+                      where c.fecha 
+                      between '$fecha1' and '$fecha2' 
+                      GROUP BY cl.nombre;";
+                      echo $query."1";
+            
+        }else{
+            $query ="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos codigo,c.fecha fecha,c.hora hora,c.tipo tipo,COUNT(c.fecha) as suma 
+                      FROM clientes cl 
+                      INNER JOIN consumos c on cl.id=c.cliId 
+                      INNER JOIN empresa emp on emp.id=cl.empId
+                      where c.fecha 
+                      between '$fecha1' and '$fecha2' and emp.id='$empresa'
+                      GROUP BY cl.nombre;";
+            echo $query."2";
+        }
+		
+		
+	}else{
+        if ($empresa>0) {
+            $query ="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos codigo,c.fecha fecha,c.hora hora,c.tipo tipo,COUNT(c.fecha) as suma 
+                      FROM clientes cl 
+                      INNER JOIN consumos c on cl.id=c.cliId 
+                      INNER JOIN empresa emp on emp.id=cl.empId
+                      where c.fecha 
+                      between '$fecha1' and '$fecha2' and c.tipo='$tipoConsumo' and emp.id='$empresa'
+                      GROUP BY cl.nombre;";
+                      echo $query."3";
+                      //tipo de consumo y empresa
+        }else{
+            $query ="SELECT cl.cedula cedula,cl.nombre cliente,emp.nombre empresa,cl.centro_costos codigo,c.fecha fecha,c.hora hora,c.tipo tipo,COUNT(c.fecha) as suma 
+                      FROM clientes cl 
+                      INNER JOIN consumos c on cl.id=c.cliId 
+                      INNER JOIN empresa emp on emp.id=cl.empId
+                      where c.fecha 
+                      between '$fecha1' and '$fecha2' and c.tipo='$tipoConsumo'
+                      GROUP BY cl.nombre;";
+                      echo $query."4";
+                      //solo tipo de  consumo
+        }
+		
+	}
 	
 //echo $query;
     $enviar=mysqli_query($db,$query);
     $ver=mysqli_fetch_array($enviar);
     $contar=mysqli_num_rows($enviar);
-	echo "<center><h1>Registros de Extras</h1></center>";
+	echo "<center><h1>Registros de Consumos Globales</h1></center>";
 	echo "<div class=container><center><table class=table >
         <thead class=thead-dark>
     <tr>
       <th scope=col>Cedula</th>
       <th scope=col>Nombre</th>
       <th scope=col>Empresa</th>
-      <th scope=col>Extra</th>
+      <th scope=col>Centro Costos</th>
       <th scope=col>Fecha</th>
-      <th scope=col>Precio</th>
-      
+      <th scope=col>Hora</th>
+      <th scope=col>Tipo</th>
+      <th scope=col>Suma</th>
     </tr>
   </thead>";
 if($contar>0) {
@@ -123,10 +166,12 @@ if($contar>0) {
 
         $cedula=$ver['cedula'];
         $cliente=$ver['cliente'];
-        $empresas=$ver['empresas'];
+        $empresa=$ver['empresa'];
         $codigo=$ver['codigo'];
         $fecha=$ver['fecha'];
-        $precio=$ver['precio'];
+        $hora=$ver['hora'];
+        $tipo=$ver['tipo'];
+        $suma=$ver['suma'];
 
         echo '
 		<tbody>
@@ -134,17 +179,19 @@ if($contar>0) {
 		
 		<td>'.$cedula.'</td>
 		<td>'.$cliente.'</td>
-        <td>'.$empresas.'</td>
+        <td>'.$empresa.'</td>
         <td>'.$codigo.'</td>
 		<td>'.$fecha.'</td>
-		<td>'.$precio.'</td>
+		<td>'.$hora.'</td>
+		<td>'.$tipo.'</td>
+		<td>'.$suma.'</td>
 		
 		</tr>
 
 	';
     } while ($ver=mysqli_fetch_array($enviar));
     echo '</tbody></table>
-		Total Extras: '.$contar.'<br>
-		<a href="exportarExcelExtras.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'&empresa='.$empresa.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
+		Total Consumos: '.$contar.'<br>
+		<a href="exportarExcel.php?fecha1='.$fecha1.'&fecha2='.$fecha2.'&tipoConsumo='.$tipoConsumo.'" class="btn btn-sm btn-success">Exportar Excel</a></center></div>';
 }
 ?>
